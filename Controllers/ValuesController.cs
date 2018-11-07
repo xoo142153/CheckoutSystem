@@ -36,13 +36,6 @@ namespace Cashier.API.Controllers
             var value = await _context.Products.FirstOrDefaultAsync(x => x.Id == id); //use firstOrDefault incase it doesnt find it, it will return null instead of exception
             return Ok(value);
         }
-        //delete THIS
-        [HttpGet("testProd/{id}")]
-        public async Task<IActionResult> testProd(int id)
-        {
-            var value = await _context.Products.FirstOrDefaultAsync(x => x.Id == id); //use firstOrDefault incase it doesnt find it, it will return null instead of exception
-            return Ok(value);
-        }
 
         // GET price using Basket of ids
         [HttpGet("getTotal")] //http://localhost:5000/api/values/getTotal?listofIds=1,2,3
