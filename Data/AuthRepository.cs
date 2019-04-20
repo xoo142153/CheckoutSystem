@@ -4,9 +4,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Cashier.API.Models;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Entity.Migrations;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 
 namespace Cashier.API.Data
@@ -14,9 +14,11 @@ namespace Cashier.API.Data
     public class AuthRepository : IAuthRepository
     {
         private DataContext _context;
-        public AuthRepository(DataContext context)
+        public IConfiguration Configuration { get; }
+        public AuthRepository(DataContext context,  IConfiguration configuration)
         {
             _context = context;
+            Configuration = configuration;
         }
         
         public async Task<User> Login(string username, string password)
@@ -141,17 +143,15 @@ namespace Cashier.API.Data
             if( await itemAvailability(name) == false ) {
                 return;
             }
-            
-            //string command = "update Products set Quantity = Quantity" + -1 + "where Name = 'test123'";
-            string command = $"update Products set Quantity = Quantity -1 where Name = '{name}'";            
-            using (SqliteConnection con = new SqliteConnection("Data Source=Cashier.db")) {
-                con.Open();
-                using (SqliteCommand cmd = con.CreateCommand()){
-                    cmd.CommandText = command;
-                    cmd.ExecuteNonQuery();
-                }
-                con.Close();
-            }
+                   
+            using (SqlConnection connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection")))
+                    {
+
+                        SqlCommand command = new SqlCommand( $"update Products set Quantity = Quantity -1 where Name = '{name}'", connection);
+                        command.Connection.Open();
+                        command.ExecuteNonQuery();
+                        command.Connection.Close();
+                    }
 /* 
             SqlConnection con  = new SqlConnection();
             SqlCommand cmd = new SqlCommand();
