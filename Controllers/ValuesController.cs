@@ -29,7 +29,17 @@ namespace Cashier.API.Controllers
 
             return Ok("YES");
         }
+
+        [AllowAnonymous]
+        [HttpGet("test2")]
+        public async Task<IActionResult> GetProducts2()
+        {
+           
+
+            return Ok("SUCCESS");
+        }
         // GET api/values
+
         [AllowAnonymous]
         [HttpGet("getProducts")]
         public async Task<IActionResult> GetProducts()
