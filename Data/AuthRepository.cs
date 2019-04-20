@@ -4,10 +4,11 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Cashier.API.Models;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Entity.Migrations;
-using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 
 namespace Cashier.API.Data
 {
@@ -143,7 +144,7 @@ namespace Cashier.API.Data
             if( await itemAvailability(name) == false ) {
                 return;
             }
-                   
+            
             using (SqlConnection connection = new SqlConnection(Configuration.GetConnectionString("DefaultConnection")))
                     {
 
@@ -152,6 +153,7 @@ namespace Cashier.API.Data
                         command.ExecuteNonQuery();
                         command.Connection.Close();
                     }
+/* 
 /* 
             SqlConnection con  = new SqlConnection();
             SqlCommand cmd = new SqlCommand();

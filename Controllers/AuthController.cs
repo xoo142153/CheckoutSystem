@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.Data.Sqlite;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
