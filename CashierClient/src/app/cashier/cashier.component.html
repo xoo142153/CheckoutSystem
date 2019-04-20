@@ -1,0 +1,27 @@
+<button onclick="location.reload();">Activate Cashier</button>
+
+<h1>Add to Basket</h1> <p>//////////////////////////////</p>
+<input (keyup.enter)="sendValues()" maxlength="8" id="stronk" [(ngModel)]="stronk" />
+<button id="addProd" (click)="sendValues()" style="visibility: hidden">Send</button>
+
+<p>////////////////////////////</p> <h1>BASKET</h1> 
+<p *ngFor="let product of basket">
+    {{product.name}}         €{{product.price}}
+    <button id="deleteProd" (click)="deleteFromBasket(product.id)">X</button>
+</p>
+
+<p>////////////////////////////</p> <h1>Warnings</h1> <p>//////////////////////////////</p>
+<p *ngFor="let error of errors">
+    {{error}}
+</p>
+
+<p>////////////////////////////</p> <h1>Checkout</h1> <p>//////////////////////////////</p> 
+<p>Total Price: {{totalprice}}</p>
+<input (keyup.enter)="getChange(given)" id="checkoutTxt" [(ngModel)]="given" />
+<button id="checkoutBasket" (click)="getChange(given)" hidden ></button>
+<button id="checkoutBasket2" (click)="Checkout()" onClick= "this.style.visibility='hidden';" >Checkout</button>
+<p>Change: {{change}}</p>
+<br>
+<br>
+<button (click)="buyCart()">Pay with card</button>
+
