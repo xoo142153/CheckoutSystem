@@ -1,8 +1,0 @@
-<br>
-<h1>Transactions</h1>
-<br>
-<a>ID  Name  TotalPrice  Date  Time</a>
-<p *ngFor="let t of transactions">
-  {{t.id}} {{t.items}}, {{t.totalPrice}}, {{t.date}}. {{t.time}}
-  <button id="deleteTransaction" (click)="deleteTransaction(t.id)">X</button>
-</p>
